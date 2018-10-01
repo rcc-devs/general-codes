@@ -9,19 +9,22 @@
 (function ($) {
   'use strict';
 
-  var ranks = [{
-    color: '#4080FF',
-    rank: {
-      name: 'Desenvolvedor',
-      className: 'rank dsn'
+  var ranks = [
+    {
+      color: '#4080FF',
+      rank: {
+        name: 'Desenvolvedor',
+        className: 'rank dsn'
+      }
+    },
+    {
+      color: '#000000',
+      rank: {
+        name: 'Corregedoria',
+        className: 'rank cor'
+      }
     }
-  }, {
-    color: '#000000',
-    rank: {
-      name: 'Corregedoria',
-      className: 'rank cor'
-    }
-  }];
+  ];
 
   $(function () {
     $('.post .user').each(function () {
