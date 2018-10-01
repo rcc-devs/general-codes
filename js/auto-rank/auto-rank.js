@@ -27,15 +27,29 @@
     {
       color: '#000000',
       rank: {
-        name: 'Corregedoria',
+        name: 'Corregedor',
         className: 'rank cor'
       }
     },
     {
       color: '#C2C2C2',
       rank: {
-        name: 'Diretoria',
+        name: 'Diretor',
         className: 'rank dire'
+      }
+    },
+    {
+      color: '#AD1818',
+      rank: {
+        name: 'G.A.T.E',
+        className: 'rank gate'
+      }
+    },
+    {
+      color: '#662020',
+      rank: {
+        name: 'Esquadrão',
+        className: 'rank ece'
       }
     },
     {
@@ -43,6 +57,20 @@
       rank: {
         name: 'Setor Administrativo',
         className: 'rank crh'
+      }
+    },
+    {
+      color: '#6c6f71',
+      rank: {
+        name: 'Relações Públicas',
+        className: 'rank srp'
+      }
+    },
+    {
+      color: '#2C1EF5',
+      rank: {
+        name: 'C.F.O',
+        className: 'rank cfo'
       }
     }
   ];
@@ -67,12 +95,15 @@
         }
 
         // Create the rank element:
-        $('<div>', {
+        var $rank = $('<div>', {
           'class': 'lf-custom-rank',
         })
           .text(this.rank.name)
-          .addClass(this.rank.className)
-          .insertAfter($this.find('.user-basic-info'));
+          .addClass(this.rank.className);
+
+        $this
+          .find('.user-basic-info > a[href] ~ .rank')
+          .replaceWith($rank);
       });
     });
   });
