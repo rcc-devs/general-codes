@@ -18,10 +18,31 @@
       }
     },
     {
+      color: '#990000',
+      rank: {
+        name: 'Administrador',
+        className: 'rank adm'
+      }
+    },
+    {
       color: '#000000',
       rank: {
         name: 'Corregedoria',
         className: 'rank cor'
+      }
+    },
+    {
+      color: '#C2C2C2',
+      rank: {
+        name: 'Diretoria',
+        className: 'rank dire'
+      }
+    },
+    {
+      color: '#003FAB',
+      rank: {
+        name: 'Setor Administrativo',
+        className: 'rank crh'
       }
     }
   ];
@@ -38,7 +59,7 @@
 
       $.each(ranks, function () {
         var $dummy = $('<span>')
-          .css('color', this.color)
+          .css('color', this.color);
 
         // If the color is not the same, pass to the next iteration:
         if ($dummy.css('color') !== $user.css('color')) {
