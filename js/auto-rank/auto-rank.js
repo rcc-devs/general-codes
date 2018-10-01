@@ -1,3 +1,5 @@
+/*globals jQuery*/
+
 /**
  * Automatic rank.
  *
@@ -75,36 +77,59 @@
     }
   ];
 
+  /**
+   * Iterate over the rank array.
+   * 
+   * @param  {string} color
+   * @param  {object<jQuery>} $originalRank
+   * @return {void}
+   */
+  function iterate (color, $originalRank) {
+    $.each(ranks, function () {
+      var $dummy = $('<span>')
+        .css('color', this.color);
+
+      // If the color is not the same, pass to the next iteration:
+      if ($dummy.css('color') !== color) {
+        return;
+      }
+
+      // Create the rank element:
+      var $newRank = $('<div>', {
+        'class': 'lf-custom-rank',
+      })
+        .text(this.rank.name)
+        .addClass(this.rank.className);
+
+      $originalRank.replaceWith($newRank);
+    });
+  }
+
   $(function () {
+    // Topics:
     $('.post .user').each(function () {
       var $this = $(this);
       var $user = $this.find('.username > a[href] > span[style]');
 
-      // If the user has not a color, pass to the next iteration:
       if (!$user.length) {
         return;
       }
 
-      $.each(ranks, function () {
-        var $dummy = $('<span>')
-          .css('color', this.color);
-
-        // If the color is not the same, pass to the next iteration:
-        if ($dummy.css('color') !== $user.css('color')) {
-          return;
-        }
-
-        // Create the rank element:
-        var $rank = $('<div>', {
-          'class': 'lf-custom-rank',
-        })
-          .text(this.rank.name)
-          .addClass(this.rank.className);
-
-        $this
-          .find('.user-basic-info > a[href] ~ .rank')
-          .replaceWith($rank);
-      });
+      iterate($user.css('color'), $this.find('.user-basic-info > a[href] ~ .rank'));
     });
+
+    // Profile:
+    if (!/^\/u\d+$/.test(location.pathname)) {
+      return;
+    }
+
+    var $profile = $('#profile-advanced-right');
+    var $user = $profile.find('.main-head > .h3 > span[style]');
+
+    if (!$user.length) {
+      return;
+    }
+
+    iterate($user.css('color'), $profile.find('.main-content > br + .rank'));
   });
 })(jQuery);
